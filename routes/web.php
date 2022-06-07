@@ -5,6 +5,7 @@
 use Illuminate\Support\Str;
 
 $router->get('/', function () { return response()->json( [ 'code' => 404, 'status' => 'HTTP 404', ], 404 ); });
+$router->get('/test', 'HomeController@index');
 
 $router->group(['prefix' => 'authentication', ], function () use ($router) {
     $router->post('/login', 'AuthController@login');
@@ -20,6 +21,7 @@ $router->group(['prefix' => 'authentication', ], function () use ($router) {
     $router->post('/reset-email', 'AuthController@changeEmail');
     $router->post('/logout', 'AuthController@logout');
     $router->post('/refresh-token', 'AuthController@refresh');
+    
 });
 
 $router->group(['prefix' => 'authentication', 'middleware' => 'jwt_auth' ], function () use ($router) {
